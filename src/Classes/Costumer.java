@@ -1,4 +1,4 @@
-package Validators;
+package Classes;
 
 public class Costumer {
     public String getName() {
