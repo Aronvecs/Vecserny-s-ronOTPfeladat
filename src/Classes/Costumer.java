@@ -1,35 +1,26 @@
 package Classes;
 
 public class Costumer {
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getName() {
+        return name;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getWebshopID() {
         return WebshopID;
     }
 
-    public void setWebshopID(String webshopID) {
+    public Costumer(int id, String name, String address, String webshopID) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
         WebshopID = webshopID;
     }
 

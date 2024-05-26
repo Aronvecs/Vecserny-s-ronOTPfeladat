@@ -3,59 +3,41 @@ package Classes;
 import java.util.Date;
 
 public class Payment {
-    public String getCostumerId() {
-        return CostumerId;
-    }
-
-    public void setCostumerId(String costumerId) {
-        CostumerId = costumerId;
-    }
-
     public String getWebshopID() {
         return WebshopID;
     }
 
-    public void setWebshopID(String webshopID) {
-        WebshopID = webshopID;
+    public String getCostumerId() {
+        return CostumerId;
     }
 
     public String getPayingMethod() {
         return PayingMethod;
     }
 
-    public void setPayingMethod(String payingMethod) {
-        PayingMethod = payingMethod;
-    }
-
     public String getSum() {
         return Sum;
-    }
-
-    public void setSum(String sum) {
-        Sum = sum;
     }
 
     public String getBankszamla() {
         return bankszamla;
     }
 
-    public void setBankszamla(String bankszamla) {
-        this.bankszamla = bankszamla;
-    }
-
     public String getBankCardNum() {
         return BankCardNum;
-    }
-
-    public void setBankCardNum(String bankCardNum) {
-        BankCardNum = bankCardNum;
     }
 
     public Date getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public Payment(String webshopID, String costumerId, String payingMethod, String sum, String bankszamla, String bankCardNum, Date date) {
+        WebshopID = webshopID;
+        CostumerId = costumerId;
+        PayingMethod = payingMethod;
+        Sum = sum;
+        this.bankszamla = bankszamla;
+        BankCardNum = bankCardNum;
         this.date = date;
     }
 
