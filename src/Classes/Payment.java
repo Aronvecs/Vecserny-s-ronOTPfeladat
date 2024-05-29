@@ -48,4 +48,17 @@ public class Payment {
     private String bankszamla;
     private String BankCardNum;
     private Date date;
+
+    @Override
+    public String toString() {
+        return "Payment{" +
+                "WebshopID='" + WebshopID + '\'' +
+                ", CostumerId='" + CostumerId + '\'' +
+                ", PayingMethod='" + PayingMethod + '\'' +
+                ", Sum=" + Sum +
+                ", bankszamla='" + bankszamla + '\'' +
+                ", BankCardNum='" + BankCardNum + '\'' +
+                ", date=" + date +
+                '}';
+    }
 }

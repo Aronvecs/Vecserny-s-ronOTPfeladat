@@ -46,19 +46,23 @@ public class Main {
         CostumersPurchases();
 
     }
+    private static void asd(){
+        List<Runnable> actions = new ArrayList<Runnable>();
 
+    }
 
     private static void CostumersPurchases() throws IOException {
         File file = new File("report01.csv");
         file.createNewFile();
         PrintWriter outputfile = new PrintWriter(file);
+        outputfile.println("Name,Address,PurchaseSum");
         payments.stream()
                 .collect(Collectors.groupingBy(Payment::getCostumerId,
                         Collectors.summingInt(Payment::getSum)))
                 .forEach((id,sumTargetCost)->{
-                    outputfile.println("Costumer's name: "+ Objects.requireNonNull(FindCostumerByID(id)).getName()
-                            +" Costumer's address: "+ Objects.requireNonNull(FindCostumerByID(id)).getAddress() +
-                            " Costumer's Purchase summary: "+ sumTargetCost);
+                    outputfile.println(Objects.requireNonNull(FindCostumerByID(id)).getName()
+                            +","+ Objects.requireNonNull(FindCostumerByID(id)).getAddress() +
+                            ","+ sumTargetCost);
                 });
         outputfile.close();
     }
@@ -147,7 +151,7 @@ public class Main {
         var validators = validatorFactory.GetValidators();
 
         int acceptedValidatiors = 0;
-        File file = new File("append.log");
+        File file = new File("append.log");//filename
         FileWriter fr = null;
         try {
             fr = new FileWriter(file, true);
@@ -160,7 +164,7 @@ public class Main {
             }
             else{
                 try {
-                    fr.write("In the line: "+costuemrlines +" "+validator.NotValid(c)+"\n");
+                    fr.write("In the line: "+costuemrlines +" "+validator.NotValid(c)+"\n");//data
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
