@@ -50,6 +50,7 @@ public class Main {
             System.out.println(c.toString());
         }
         TheTop2Costumer(firstNElementsList);
+        WebshopsIncome();
     }
     private static void TheTop2Costumer(List<TopCostumer> costumers) throws IOException {
         File file = new File("src\\CSVFiles","top.csv");
@@ -62,7 +63,29 @@ public class Main {
         outputfile.close();
 
     }
-
+    private static void WebshopsIncome() throws IOException {
+        File file = new File("src\\CSVFiles","report02.csv");
+        file.createNewFile();
+        PrintWriter outputfile = new PrintWriter(file);
+        outputfile.println("Webshop,TransferPurchases,BankCardPurchases");
+        payments.stream()
+                .collect(Collectors.groupingBy(Payment::getWebshopID,
+                        Collectors.groupingBy(Payment::getPayingMethod, Collectors.summingInt(Payment::getSum))))
+                .forEach((id, paymentMethod)->{
+                    System.out.println(id+paymentMethod);
+                    outputfile.print(id+",");
+                    paymentMethod.forEach((s,d)->{
+                        if (d==null){
+                            outputfile.print(0+",");
+                        }
+                        else{
+                            outputfile.print(d+",");
+                        }
+                    });
+                    outputfile.println();
+                });
+        outputfile.close();
+    }
     private static void CostumersPurchases() throws IOException {
         File file = new File("src\\CSVFiles","report01.csv");
         file.createNewFile();
@@ -137,7 +160,7 @@ public class Main {
 
     private static Payment ValidationCheck(Iterable<PaymentValidatorBase> validators, Payment c) {
         int acceptedValidatiors = 0;
-        File file = new File("append.log");
+        File file = new File("src\\CSVFiles", "append.log");
         FileWriter fr = null;
         try {
             fr = new FileWriter(file, true);
@@ -176,7 +199,7 @@ public class Main {
         var validators = validatorFactory.GetValidators();
 
         int acceptedValidatiors = 0;
-        File file = new File("append.log");//filename
+        File file = new File("src\\CSVFiles","append.log");//filename
         FileWriter fr = null;
         try {
             fr = new FileWriter(file, true);

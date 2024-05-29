@@ -7,8 +7,11 @@ import static java.lang.Long.parseLong;
 public class BankCardValidator extends PaymentValidatorBase {
     @Override
     public boolean Validate(Payment payment) {
+        if (payment.getBankCardNum() == "none"){
+            return false;
+        }
         long newline = parseLong(payment.getBankCardNum());
-        return (thesize(newline) >= 13 && thesize(newline) <= 16) && (prefixmatch(newline, 4)
+        return  (thesize(newline) >= 13 && thesize(newline) <= 16) && (prefixmatch(newline, 4)
                 || prefixmatch(newline, 5) || prefixmatch(newline, 37) || prefixmatch(newline, 6))
                 && ((sumdoubleeven(newline) + sumodd(newline)) % 10 == 0);
     }
