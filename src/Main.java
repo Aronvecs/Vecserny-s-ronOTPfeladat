@@ -6,14 +6,12 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import Classes.Costumer;
 import Classes.Payment;
+import Classes.TopCostumer;
 import Validators.CostumerValidatorFactory;
 import Validators.PaymentValidatorBase;
 import Validators.PaymentValidatorFactory;
@@ -22,11 +20,9 @@ import Validators.PaymentValidatorFactory;
 public class Main {
     static List<Costumer> costumers = new ArrayList<>();
     static List<Payment> payments = new ArrayList<>();
+    static List<TopCostumer> topCostumers = new ArrayList<>();
     static int paymentslines = 0;
     static int costuemrlines = 0;
-
-    public Main() throws FileNotFoundException {
-    }
 
     public static void main(String[] args) throws IOException {
         Path path = Path.of("src", "CSVFiles", "costumer.csv");
@@ -44,15 +40,31 @@ public class Main {
         System.out.println(paymentslines);
 
         CostumersPurchases();
+        path = Path.of("src", "CSVFiles", "report01.csv");
+        Readingreport01CSVFile(path);
 
+        topCostumers.sort(Comparator.comparing(TopCostumer::getSum).reversed());
+        var firstNElementsList = topCostumers.stream().limit(2).collect(Collectors.toList());
+
+        for (TopCostumer c : firstNElementsList){
+            System.out.println(c.toString());
+        }
+        TheTop2Costumer(firstNElementsList);
     }
-    private static void asd(){
-        List<Runnable> actions = new ArrayList<Runnable>();
+    private static void TheTop2Costumer(List<TopCostumer> costumers) throws IOException {
+        File file = new File("src\\CSVFiles","top.csv");
+        file.createNewFile();
+        PrintWriter outputfile = new PrintWriter(file);
+        outputfile.println("Name,Address,PurchaseSum");
+        for (TopCostumer c : costumers){
+            outputfile.print(c.getName()+","+c.getAddress()+","+c.getSum()+"\n");
+        }
+        outputfile.close();
 
     }
 
     private static void CostumersPurchases() throws IOException {
-        File file = new File("report01.csv");
+        File file = new File("src\\CSVFiles","report01.csv");
         file.createNewFile();
         PrintWriter outputfile = new PrintWriter(file);
         outputfile.println("Name,Address,PurchaseSum");
@@ -60,9 +72,9 @@ public class Main {
                 .collect(Collectors.groupingBy(Payment::getCostumerId,
                         Collectors.summingInt(Payment::getSum)))
                 .forEach((id,sumTargetCost)->{
-                    outputfile.println(Objects.requireNonNull(FindCostumerByID(id)).getName()
+                    outputfile.print(Objects.requireNonNull(FindCostumerByID(id)).getName()
                             +","+ Objects.requireNonNull(FindCostumerByID(id)).getAddress() +
-                            ","+ sumTargetCost);
+                            ","+ sumTargetCost+"\n");
                 });
         outputfile.close();
     }
@@ -91,6 +103,19 @@ public class Main {
                 .forEach((n)->{
                     if (n != null){
                         costumers.add(n);
+                    }
+                });
+    }
+    private static void Readingreport01CSVFile(Path path) throws IOException {
+        Files.lines(path)
+                .skip(1)
+                .map(line->{
+                    String[] split = line.split(",");
+                    return new TopCostumer(split[0], split[1], Integer.valueOf(split[2]));
+                })
+                .forEach((n)->{
+                    if (n != null){
+                        topCostumers.add(n);
                     }
                 });
     }
@@ -181,6 +206,7 @@ public class Main {
 
         return null;
     }
+
 
     public static int size(Iterable data) {
 
