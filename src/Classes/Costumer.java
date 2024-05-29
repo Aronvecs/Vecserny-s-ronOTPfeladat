@@ -1,7 +1,7 @@
 package Classes;
 
 public class Costumer {
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -17,14 +17,24 @@ public class Costumer {
         return WebshopID;
     }
 
-    public Costumer(int id, String name, String address, String webshopID) {
+    public Costumer(String id, String name, String address, String webshopID) {
         this.id = id;
         this.name = name;
         this.address = address;
         WebshopID = webshopID;
     }
 
-    private int id;
+    @Override
+    public String toString() {
+        return "Costumer{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", WebshopID='" + WebshopID + '\'' +
+                '}';
+    }
+
+    private String id;
     private String name;
     private String address;
     private String WebshopID;

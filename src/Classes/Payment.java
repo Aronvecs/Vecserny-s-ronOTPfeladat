@@ -15,7 +15,7 @@ public class Payment {
         return PayingMethod;
     }
 
-    public String getSum() {
+    public int getSum() {
         return Sum;
     }
 
@@ -31,7 +31,7 @@ public class Payment {
         return date;
     }
 
-    public Payment(String webshopID, String costumerId, String payingMethod, String sum, String bankszamla, String bankCardNum, Date date) {
+    public Payment(String webshopID, String costumerId, String payingMethod, int sum, String bankszamla, String bankCardNum, Date date) {
         WebshopID = webshopID;
         CostumerId = costumerId;
         PayingMethod = payingMethod;
@@ -44,7 +44,7 @@ public class Payment {
     private String WebshopID;
     private String CostumerId;
     private String PayingMethod;
-    private String Sum;
+    private int Sum;
     private String bankszamla;
     private String BankCardNum;
     private Date date;
