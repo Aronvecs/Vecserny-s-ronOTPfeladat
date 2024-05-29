@@ -2,12 +2,14 @@ package Validators;
 
 import Classes.Payment;
 
+import java.util.Objects;
+
 import static java.lang.Long.parseLong;
 
 public class BankCardValidator extends PaymentValidatorBase {
     @Override
     public boolean Validate(Payment payment) {
-        if (payment.getBankCardNum() == "none"){
+        if (Objects.equals(payment.getBankCardNum(), "none")){
             return false;
         }
         long newline = parseLong(payment.getBankCardNum());

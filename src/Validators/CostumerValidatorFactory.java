@@ -5,7 +5,7 @@ import java.util.List;
 
 public class CostumerValidatorFactory {
     public Iterable<CostumerValidatorBase> GetValidators() {
-        List<CostumerValidatorBase> validators = new ArrayList<CostumerValidatorBase>();
+        List<CostumerValidatorBase> validators = new ArrayList<>();
         validators.add(new CostumerIDValidator());
         return validators;
     }

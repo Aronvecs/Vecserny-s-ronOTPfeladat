@@ -1,7 +1,6 @@
 package Validators;
 
 
-import Classes.Costumer;
 import Classes.Payment;
 
 public abstract class PaymentValidatorBase {

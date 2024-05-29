@@ -41,13 +41,13 @@ public class Payment {
         this.date = date;
     }
 
-    private String WebshopID;
-    private String CostumerId;
-    private String PayingMethod;
-    private int Sum;
-    private String bankszamla;
-    private String BankCardNum;
-    private Date date;
+    private final String WebshopID;
+    private final String CostumerId;
+    private final String PayingMethod;
+    private final int Sum;
+    private final String bankszamla;
+    private final String BankCardNum;
+    private final Date date;
 
     @Override
     public String toString() {

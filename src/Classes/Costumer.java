@@ -34,8 +34,8 @@ public class Costumer {
                 '}';
     }
 
-    private String id;
-    private String name;
-    private String address;
-    private String WebshopID;
+    private final String id;
+    private final String name;
+    private final String address;
+    private final String WebshopID;
 }
